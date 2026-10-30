@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POWERPULSE - Elite Fitness & Gym</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Montserrat & Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,900;1,900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            yellow: '#CCFF00', // Neon Lime Yellow
+                            orange: '#FF5500', // Neon Orange
+                            dark: '#0A0A0C',   // Deep Obsidian
+                            card: '#141418',   // Slightly lighter dark for contrast
+                            border: '#26262E'  // Subtle border gray
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0C;
+            color: #E2E8F0;
+            overflow-x: hidden;
+        }
+        .text-glow {
+            text-shadow: 0 0 12px rgba(204, 255, 0, 0.4);
+        }
+        .text-glow-orange {
+            text-shadow: 0 0 12px rgba(255, 85, 0, 0.4);
+        }
+        .box-glow:hover {
+            box-shadow: 0 0 25px rgba(204, 255, 0, 0.2);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0A0A0C;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #26262E;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #CCFF00;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-yellow selection:text-black">
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-brand-dark/90 backdrop-blur-md border-b border-brand-border transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 bg-brand-yellow rounded-lg flex items-center justify-center text-black font-extrabold text-xl font-heading transform group-hover:rotate-6 transition-transform">
+                        <i class="fa-solid => fa-dumbbell"></i>
+                    </div>
+                    <span class="text-2xl font-black font-heading tracking-wider text-white">POWER<span class="text-brand-yellow">PULSE</span></span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide">
+                    <a href="#home" class="text-white hover:text-brand-yellow transition-colors">HOME</a>
+                    <a href="#services" class="text-gray-300 hover:text-brand-yellow transition-colors">SERVICES</a>
+                    <a href="#plans" class="text-gray-300 hover:text-brand-yellow transition-colors">MEMBERSHIP</a>
+                    <a href="#trainers" class="text-gray-300 hover:text-brand-yellow transition-colors">TRAINERS</a>
+                    <a href="#bmi" class="text-gray-300 hover:text-brand-yellow transition-colors">BMI CALCULATOR</a>
+                    <a href="#contact" class="text-gray-300 hover:text-brand-yellow transition-colors">CONTACT</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden md:flex items-center">
+                    <a href="#plans" class="bg-brand-yellow hover:bg-yellow-400 text-black font-extrabold font-heading px-6 py-2.5 rounded-lg transition-all transform hover:scale-105 hover:shadow-[0_0_20px_rgba(204,255,0,0.4)]">
+                        JOIN NOW
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white text-2xl focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Nav -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-card border-b border-brand-border px-4 pt-2 pb-6 space-y-3 font-heading font-semibold">
+            <a href="#home" class="mobile-link block text-brand-yellow py-2">HOME</a>
+            <a href="#services" class="mobile-link block text-gray-300 hover:text-brand-yellow py-2">SERVICES</a>
+            <a href="#plans" class="mobile-link block text-gray-300 hover:text-brand-yellow py-2">MEMBERSHIP</a>
+            <a href="#trainers" class="mobile-link block text-gray-300 hover:text-brand-yellow py-2">TRAINERS</a>
+            <a href="#bmi" class="mobile-link block text-gray-300 hover:text-brand-yellow py-2">BMI CALCULATOR</a>
+            <a href="#contact" class="mobile-link block text-gray-300 hover:text-brand-yellow py-2">CONTACT</a>
+            <a href="#plans" class="mobile-link block bg-brand-yellow text-black text-center py-3 rounded-lg font-extrabold mt-4">JOIN NOW</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <!-- Background Overlay & Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80" 
+                 alt="Gym background" 
+                 class="w-full h-full object-cover object-center opacity-30 filter brightness-75">
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/80 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+            <div class="max-w-2xl space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow text-xs sm:text-sm font-semibold uppercase tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-brand-yellow animate-pulse"></span>
+                    No Excuses • Unlimited Potential
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black font-heading tracking-tight leading-none uppercase">
+                    BEST GYM IN <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-brand-orange text-glow">UTTAM NAGAR</span>
+                </h1>
+
+                <p class="text-gray-400 text-base sm:text-lg max-w-xl">
+                    Unleash your strength with state-of-the-art equipment, personalized workout regimes, and world-class certified trainers dedicated to your goals.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <a href="#plans" class="inline-flex justify-center items-center gap-2 bg-brand-yellow hover:bg-yellow-400 text-black font-extrabold font-heading px-8 py-4 rounded-xl transition-all transform hover:-translate-y-0.5 shadow-lg shadow-brand-yellow/20 text-center">
+                        START YOUR JOURNEY <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="#services" class="inline-flex justify-center items-center gap-2 border border-gray-700 hover:border-brand-yellow text-white font-bold font-heading px-8 py-4 rounded-xl transition-colors text-center">
+                        EXPLORE PROGRAMS
+                    </a>
+                </div>
+
+                <!-- Stats Bar -->
+                <div class="grid grid-cols-3 gap-4 pt-12 border-t border-brand-border/60 mt-12">
+                    <div>
+                        <span class="block text-2xl sm:text-4xl font-black font-heading text-brand-yellow">1500+</span>
+                        <span class="text-xs sm:text-sm text-gray-400 uppercase tracking-wider">Active Members</span>
+                    </div>
+                    <div>
+                        <span class="block text-2xl sm:text-4xl font-black font-heading text-brand-yellow">25+</span>
+                        <span class="text-xs sm:text-sm text-gray-400 uppercase tracking-wider">Pro Trainers</span>
+                    </div>
+                    <div>
+                        <span class="block text-2xl sm:text-4xl font-black font-heading text-brand-yellow">50+</span>
+                        <span class="text-xs sm:text-sm text-gray-400 uppercase tracking-wider">Daily Classes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-brand-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <h2 class="text-brand-yellow font-extrabold font-heading text-sm tracking-widest uppercase">WHAT WE OFFER</h2>
+                <p class="text-3xl sm:text-5xl font-black font-heading uppercase text-white">WORLD-CLASS SERVICES</p>
+                <p class="text-gray-400">Everything you need to break limits, build muscle, lose weight, and maintain peak fitness performance.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl p-8 hover:border-brand-yellow transition-all duration-300 box-glow group">
+                    <div class="w-14 h-14 bg-brand-yellow/10 rounded-xl flex items-center justify-center text-brand-yellow text-2xl mb-6 group-hover:bg-brand-yellow group-hover:text-black transition-colors">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading mb-3 text-white group-hover:text-brand-yellow transition-colors">High-Intensity Cardio</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Boost stamina, ignite fat burning, and improve heart health with modern treadmills, rowing machines, and HIIT zones.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl p-8 hover:border-brand-yellow transition-all duration-300 box-glow group">
+                    <div class="w-14 h-14 bg-brand-yellow/10 rounded-xl flex items-center justify-center text-brand-yellow text-2xl mb-6 group-hover:bg-brand-yellow group-hover:text-black transition-colors">
+                        <i class="fa-solid fa-dumbbell"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading mb-3 text-white group-hover:text-brand-yellow transition-colors">Heavy Weight Training</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Fully equipped free-weight stations, squat racks, powerlifting platforms, and isolated weight-training gear.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl p-8 hover:border-brand-yellow transition-all duration-300 box-glow group">
+                    <div class="w-14 h-14 bg-brand-yellow/10 rounded-xl flex items-center justify-center text-brand-yellow text-2xl mb-6 group-hover:bg-brand-yellow group-hover:text-black transition-colors">
+                        <i class="fa-solid fa-user-ninja"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading mb-3 text-white group-hover:text-brand-yellow transition-colors">Personalized Coaching</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Work 1-on-1 with elite trainers tailored to your individual physique goals, form correction, and progress tracking.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl p-8 hover:border-brand-yellow transition-all duration-300 box-glow group">
+                    <div class="w-14 h-14 bg-brand-yellow/10 rounded-xl flex items-center justify-center text-brand-yellow text-2xl mb-6 group-hover:bg-brand-yellow group-hover:text-black transition-colors">
+                        <i class="fa-solid fa-spa"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading mb-3 text-white group-hover:text-brand-yellow transition-colors">Yoga & Mobility</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Improve flexibility, balance, core stability, and post-workout recovery in our tranquil dedicated yoga studio.</p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl p-8 hover:border-brand-yellow transition-all duration-300 box-glow group">
+                    <div class="w-14 h-14 bg-brand-yellow/10 rounded-xl flex items-center justify-center text-brand-yellow text-2xl mb-6 group-hover:bg-brand-yellow group-hover:text-black transition-colors">
+                        <i class="fa-solid fa-apple-whole"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading mb-3 text-white group-hover:text-brand-yellow transition-colors">Custom Nutrition Plans</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Fuel your progress with tailored diet recommendations, macronutrient breakdowns, and supplement guidance.</p>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl p-8 hover:border-brand-yellow transition-all duration-300 box-glow group">
+                    <div class="w-14 h-14 bg-brand-yellow/10 rounded-xl flex items-center justify-center text-brand-yellow text-2xl mb-6 group-hover:bg-brand-yellow group-hover:text-black transition-colors">
+                        <i class="fa-solid fa-stopwatch"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading mb-3 text-white group-hover:text-brand-yellow transition-colors">24/7 Access</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Train on your schedule. Premium members enjoy round-the-clock secure gym entry 365 days a year.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership Plans Section -->
+    <section id="plans" class="py-24 bg-black/50 border-y border-brand-border relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <h2 class="text-brand-orange font-extrabold font-heading text-sm tracking-widest uppercase">MEMBERSHIP PRICING</h2>
+                <p class="text-3xl sm:text-5xl font-black font-heading uppercase text-white">CHOOSE YOUR PLAN</p>
+                <p class="text-gray-400">Flexible plans designed for all fitness goals in Uttam Nagar. No hidden fees.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+                <!-- Monthly Plan -->
+                <div class="bg-brand-card border border-brand-border rounded-3xl p-8 flex flex-col justify-between hover:border-gray-600 transition-all">
+                    <div>
+                        <div class="inline-block px-3 py-1 bg-gray-800 text-gray-300 text-xs font-bold rounded-full mb-4">MONTHLY</div>
+                        <h3 class="text-2xl font-black font-heading text-white">1 MONTH PLAN</h3>
+                        <div class="my-6">
+                            <span class="text-4xl sm:text-5xl font-black font-heading text-white">₹1,500</span>
+                            <span class="text-gray-400 font-medium">/ month</span>
+                        </div>
+                        <ul class="space-y-4 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-yellow"></i> Full Gym & Cardio Access</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-yellow"></i> General Trainer Guidance</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-yellow"></i> Locker & Shower Facilities</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-yellow"></i> Free High-Speed Wi-Fi</li>
+                            <li class="flex items-center gap-3 text-gray-600"><i class="fa-solid fa-xmark"></i> Personal Diet Chart</li>
+                        </ul>
+                    </div>
+                    <button onclick="selectPlan('1 Month Plan', '₹1,500/mo')" class="w-full py-4 rounded-xl border border-brand-yellow text-brand-yellow font-extrabold font-heading hover:bg-brand-yellow hover:text-black transition-colors">
+                        SELECT PLAN
+                    </button>
+                </div>
+
+                <!-- 6-Month Plan (Featured) -->
+                <div class="bg-gradient-to-b from-brand-card to-brand-dark border-2 border-brand-yellow rounded-3xl p-8 flex flex-col justify-between relative transform lg:-translate-y-4 shadow-2xl shadow-brand-yellow/10">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-yellow text-black font-black text-xs font-heading px-4 py-1.5 rounded-full uppercase tracking-wider">
+                        MOST POPULAR (SAVE ₹3,000)
+                    </div>
+                    <div>
+                        <div class="inline-block px-3 py-1 bg-brand-yellow/20 text-brand-yellow text-xs font-bold rounded-full mb-4">HALF YEARLY</div>
+                        <h3 class="text-2xl font-black font-heading text-white">6 MONTHS PLAN</h3>
+                        <div class="my-6">
+                            <span class="text-4xl sm:text-5xl font-black font-heading text-brand-yellow">₹6,000</span>
+                            <span class="text-gray-400 font-medium">/ 6 months</span>
+                        </div>
+                        <p class="text-xs text-brand-yellow/80 font-bold -mt-4 mb-6">Effective ₹1,000 / month</p>
+                        <ul class="space-y-4 text-sm text-gray-200 mb-8">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-yellow"></i> Full Gym & Cardio Access</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-yellow"></i> Customized Diet & Nutrition Plan</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-yellow"></i> 1 Session / Month PT Assessment</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-yellow"></i> Steam & Sauna Bath Access</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-yellow"></i> Locker & Shower Access</li>
+                        </ul>
+                    </div>
+                    <button onclick="selectPlan('6 Months Plan', '₹6,000')" class="w-full py-4 rounded-xl bg-brand-yellow hover:bg-yellow-400 text-black font-extrabold font-heading transition-all shadow-lg shadow-brand-yellow/20">
+                        SELECT PLAN
+                    </button>
+                </div>
+
+                <!-- Yearly Plan -->
+                <div class="bg-brand-card border border-brand-border rounded-3xl p-8 flex flex-col justify-between hover:border-brand-orange transition-all">
+                    <div>
+                        <div class="inline-block px-3 py-1 bg-brand-orange/20 text-brand-orange text-xs font-bold rounded-full mb-4">ANNUAL</div>
+                        <h3 class="text-2xl font-black font-heading text-white">1 YEAR PLAN</h3>
+                        <div class="my-6">
+                            <span class="text-4xl sm:text-5xl font-black font-heading text-brand-orange">₹11,000</span>
+                            <span class="text-gray-400 font-medium">/ year</span>
+                        </div>
+                        <p class="text-xs text-brand-orange/80 font-bold -mt-4 mb-6">Effective ~₹916 / month</p>
+                        <ul class="space-y-4 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-orange"></i> All 6-Month Plan Features</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-orange"></i> Free Gym Shaker & T-Shirt</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-orange"></i> 1 Month Membership Freeze Facility</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-orange"></i> Unlimited Steam Bath Access</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-orange"></i> 2 Guest Passes Per Month</li>
+                        </ul>
+                    </div>
+                    <button onclick="selectPlan('1 Year Plan', '₹11,000')" class="w-full py-4 rounded-xl border border-brand-orange text-brand-orange font-extrabold font-heading hover:bg-brand-orange hover:text-white transition-colors">
+                        SELECT PLAN
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trainer Profiles Section -->
+    <section id="trainers" class="py-24 bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <h2 class="text-brand-yellow font-extrabold font-heading text-sm tracking-widest uppercase">MEET THE MASTERS</h2>
+                <p class="text-3xl sm:text-5xl font-black font-heading uppercase text-white">EXPERT TRAINERS</p>
+                <p class="text-gray-400">Certified professionals passionate about helping you surpass your fitness barriers.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Trainer 1 -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl overflow-hidden group hover:border-brand-yellow transition-all duration-300">
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?auto=format&fit=crop&w=800&q=80" 
+                             alt="Marcus Vance" 
+                             class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold font-heading text-white">Marcus Vance</h3>
+                        <p class="text-brand-yellow text-sm font-semibold mb-2">Bodybuilding & Strength</p>
+                        <p class="text-gray-400 text-xs mb-4">10+ years coaching professional bodybuilders and physique athletes.</p>
+                        <div class="flex gap-3 text-gray-400 text-sm">
+                            <a href="#" class="hover:text-brand-yellow"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="hover:text-brand-yellow"><i class="fa-brands fa-x-twitter"></i></a>
+                            <a href="#" class="hover:text-brand-yellow"><i class="fa-brands fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trainer 2 -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl overflow-hidden group hover:border-brand-yellow transition-all duration-300">
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80" 
+                             alt="Elena Rostova" 
+                             class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold font-heading text-white">Elena Rostova</h3>
+                        <p class="text-brand-yellow text-sm font-semibold mb-2">HIIT & Functional Fitness</p>
+                        <p class="text-gray-400 text-xs mb-4">Specialist in fat loss transformations and high-energy group workouts.</p>
+                        <div class="flex gap-3 text-gray-400 text-sm">
+                            <a href="#" class="hover:text-brand-yellow"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="hover:text-brand-yellow"><i class="fa-brands fa-x-twitter"></i></a>
+                            <a href="#" class="hover:text-brand-yellow"><i class="fa-brands fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trainer 3 -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl overflow-hidden group hover:border-brand-yellow transition-all duration-300">
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&q=80" 
+                             alt="David Chen" 
+                             class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold font-heading text-white">David Chen</h3>
+                        <p class="text-brand-yellow text-sm font-semibold mb-2">Calisthenics & Mobility</p>
+                        <p class="text-gray-400 text-xs mb-4">Master of bodyweight control, agility, and injury prevention.</p>
+                        <div class="flex gap-3 text-gray-400 text-sm">
+                            <a href="#" class="hover:text-brand-yellow"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="hover:text-brand-yellow"><i class="fa-brands fa-x-twitter"></i></a>
+                            <a href="#" class="hover:text-brand-yellow"><i class="fa-brands fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trainer 4 -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl overflow-hidden group hover:border-brand-yellow transition-all duration-300">
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80" 
+                             alt="Sarah Jenkins" 
+                             class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold font-heading text-white">Sarah Jenkins</h3>
+                        <p class="text-brand-yellow text-sm font-semibold mb-2">Nutrition & Yoga</p>
+                        <p class="text-gray-400 text-xs mb-4">Certified dietitian helping athletes optimize wellness and mindset.</p>
+                        <div class="flex gap-3 text-gray-400 text-sm">
+                            <a href="#" class="hover:text-brand-yellow"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="hover:text-brand-yellow"><i class="fa-brands fa-x-twitter"></i></a>
+                            <a href="#" class="hover:text-brand-yellow"><i class="fa-brands fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive BMI Calculator Section -->
+    <section id="bmi" class="py-24 bg-brand-card/60 border-y border-brand-border relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Left Details -->
+                <div class="space-y-6">
+                    <h2 class="text-brand-yellow font-extrabold font-heading text-sm tracking-widest uppercase">KNOW YOUR METRICS</h2>
+                    <p class="text-3xl sm:text-5xl font-black font-heading uppercase text-white">BMI CALCULATOR</p>
+                    <p class="text-gray-400">
+                        Body Mass Index (BMI) is a simple metric that uses your height and weight to work out if your weight is healthy. Calculate yours now to set a baseline for your transformation!
+                    </p>
+
+                    <div class="space-y-3 pt-4">
+                        <div class="flex items-center justify-between p-3 rounded-lg bg-brand-dark/50 border border-brand-border text-sm">
+                            <span class="text-blue-400 font-bold">Underweight</span>
+                            <span class="text-gray-400">&lt; 18.5</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-lg bg-brand-dark/50 border border-brand-border text-sm">
+                            <span class="text-brand-yellow font-bold">Normal weight</span>
+                            <span class="text-gray-400">18.5 – 24.9</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-lg bg-brand-dark/50 border border-brand-border text-sm">
+                            <span class="text-brand-orange font-bold">Overweight</span>
+                            <span class="text-gray-400">25.0 – 29.9</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-lg bg-brand-dark/50 border border-brand-border text-sm">
+                            <span class="text-red-500 font-bold">Obese</span>
+                            <span class="text-gray-400">&ge; 30.0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Form Box -->
+                <div class="bg-brand-dark border border-brand-border rounded-3xl p-8 shadow-xl">
+                    <form id="bmi-form" onsubmit="event.preventDefault(); calculateBMI();" class="space-y-6">
+                        <div>
+                            <label class="block text-xs font-bold font-heading uppercase text-gray-300 mb-2">Height (CM)</label>
+                            <input type="number" id="bmi-height" min="100" max="250" placeholder="e.g. 175" required
+                                   class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-brand-yellow transition-colors">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold font-heading uppercase text-gray-300 mb-2">Weight (KG)</label>
+                            <input type="number" id="bmi-weight" min="30" max="300" placeholder="e.g. 70" required
+                                   class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-brand-yellow transition-colors">
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-brand-yellow hover:bg-yellow-400 text-black font-extrabold font-heading transition-all shadow-lg shadow-brand-yellow/20">
+                            CALCULATE BMI
+                        </button>
+                    </form>
+
+                    <!-- Result Output Box -->
+                    <div id="bmi-result" class="hidden mt-6 p-6 rounded-2xl bg-brand-card border border-brand-border text-center">
+                        <span class="block text-xs font-bold font-heading text-gray-400 uppercase mb-1">YOUR RESULT</span>
+                        <div id="bmi-value" class="text-4xl font-black font-heading text-brand-yellow my-1">--.--</div>
+                        <div id="bmi-status" class="text-sm font-bold uppercase tracking-wider text-white">--</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Location Section -->
+    <section id="contact" class="py-24 bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <h2 class="text-brand-yellow font-extrabold font-heading text-sm tracking-widest uppercase">GET IN TOUCH</h2>
+                <p class="text-3xl sm:text-5xl font-black font-heading uppercase text-white">VISIT OR CONTACT US</p>
+                <p class="text-gray-400">Have questions? Ready for a free day-pass? Send us a message or stop by!</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Info & Hours -->
+                <div class="space-y-8">
+                    <div class="bg-brand-card border border-brand-border p-8 rounded-3xl space-y-6">
+                        <h3 class="text-2xl font-bold font-heading text-white">LOCATION & DETAILS</h3>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-brand-yellow/10 rounded-xl flex items-center justify-center text-brand-yellow text-xl shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">ADDRESS</h4>
+                                <p class="text-gray-400 text-sm">124 Fitness Boulevard, Cyber City, Sector 5, Metropolitan</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-brand-yellow/10 rounded-xl flex items-center justify-center text-brand-yellow text-xl shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">PHONE</h4>
+                                <p class="text-gray-400 text-sm">+1 (555) 839-2001 / +1 (555) 902-1144</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-brand-yellow/10 rounded-xl flex items-center justify-center text-brand-yellow text-xl shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">EMAIL</h4>
+                                <p class="text-gray-400 text-sm">support@powerpulse.fit</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hours -->
+                    <div class="bg-brand-card border border-brand-border p-8 rounded-3xl space-y-4">
+                        <h3 class="text-xl font-bold font-heading text-white flex items-center gap-2">
+                            <i class="fa-solid fa-clock text-brand-yellow"></i> WORKING HOURS
+                        </h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between py-1 border-b border-brand-border/50">
+                                <span class="text-gray-400">Monday - Friday</span>
+                                <span class="font-semibold text-white">05:00 AM - 11:00 PM</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-brand-border/50">
+                                <span class="text-gray-400">Saturday</span>
+                                <span class="font-semibold text-white">06:00 AM - 10:00 PM</span>
+                            </div>
+                            <div class="flex justify-between py-1">
+                                <span class="text-gray-400">Sunday</span>
+                                <span class="font-semibold text-brand-yellow">07:00 AM - 08:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="bg-brand-card border border-brand-border p-8 rounded-3xl">
+                    <h3 class="text-2xl font-bold font-heading text-white mb-6">SEND US A MESSAGE</h3>
+                    
+                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-5">
+                        <div>
+                            <label class="block text-xs font-bold font-heading uppercase text-gray-300 mb-2">FULL NAME</label>
+                            <input type="text" id="contact-name" required placeholder="John Doe"
+                                   class="w-full bg-brand-dark border border-brand-border rounded-xl px-4 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-brand-yellow transition-colors">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold font-heading uppercase text-gray-300 mb-2">EMAIL ADDRESS</label>
+                            <input type="email" id="contact-email" required placeholder="john@example.com"
+                                   class="w-full bg-brand-dark border border-brand-border rounded-xl px-4 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-brand-yellow transition-colors">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold font-heading uppercase text-gray-300 mb-2">SELECT PLAN INTEREST (OPTIONAL)</label>
+                            <select id="contact-plan" class="w-full bg-brand-dark border border-brand-border rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-brand-yellow transition-colors">
+                                <option value="General Inquiry">General Inquiry / Free Trial Pass</option>
+                                <option value="1 Month Plan">1 Month Plan (₹1,500/mo)</option>
+                                <option value="6 Months Plan">6 Months Plan (₹6,000)</option>
+                                <option value="1 Year Plan">1 Year Plan (₹11,000)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold font-heading uppercase text-gray-300 mb-2">MESSAGE</label>
+                            <textarea id="contact-message" rows="4" required placeholder="Tell us about your fitness goals..."
+                                      class="w-full bg-brand-dark border border-brand-border rounded-xl px-4 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-brand-yellow transition-colors resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-brand-yellow hover:bg-yellow-400 text-black font-extrabold font-heading transition-all shadow-lg shadow-brand-yellow/20">
+                            SUBMIT MESSAGE
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-brand-border py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-brand-yellow rounded-lg flex items-center justify-center text-black font-extrabold text-sm font-heading">
+                        <i class="fa-solid fa-dumbbell"></i>
+                    </div>
+                    <span class="text-xl font-black font-heading tracking-wider text-white">POWER<span class="text-brand-yellow">PULSE</span></span>
+                </a>
+
+                <!-- Quick Links -->
+                <div class="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
+                    <a href="#home" class="hover:text-brand-yellow transition-colors">Home</a>
+                    <a href="#services" class="hover:text-brand-yellow transition-colors">Services</a>
+                    <a href="#plans" class="hover:text-brand-yellow transition-colors">Plans</a>
+                    <a href="#trainers" class="hover:text-brand-yellow transition-colors">Trainers</a>
+                    <a href="#bmi" class="hover:text-brand-yellow transition-colors">BMI</a>
+                    <a href="#contact" class="hover:text-brand-yellow transition-colors">Contact</a>
+                </div>
+
+                <!-- Copyright -->
+                <p class="text-gray-500 text-xs">
+                    &copy; 2026 POWERPULSE Fitness Gym. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal Box (Custom Alert replacement) -->
+    <div id="modal-box" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden px-4">
+        <div class="bg-brand-card border border-brand-yellow p-8 rounded-3xl max-w-md w-full text-center space-y-4 relative transform animate-bounce-once">
+            <div class="w-16 h-16 bg-brand-yellow/20 text-brand-yellow rounded-full flex items-center justify-center mx-auto text-3xl">
+                <i id="modal-icon" class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 id="modal-title" class="text-2xl font-bold font-heading text-white">SUCCESS</h3>
+            <p id="modal-message" class="text-gray-300 text-sm">Your message has been received!</p>
+            <button onclick="closeModal()" class="w-full py-3 bg-brand-yellow text-black font-bold font-heading rounded-xl hover:bg-yellow-400 transition-colors">
+                CLOSE
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // BMI Calculation Function
+        function calculateBMI() {
+            const height = parseFloat(document.getElementById('bmi-height').value);
+            const weight = parseFloat(document.getElementById('bmi-weight').value);
+            
+            if (!height || !weight || height <= 0 || weight <= 0) {
+                showModal('Invalid Input', 'Please enter valid values for height and weight.');
+                return;
+            }
+
+            // Formula: weight (kg) / [height (m)]^2
+            const heightInMeters = height / 100;
+            const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(1);
+
+            const resultDiv = document.getElementById('bmi-result');
+            const bmiValueEl = document.getElementById('bmi-value');
+            const bmiStatusEl = document.getElementById('bmi-status');
+
+            bmiValueEl.innerText = bmi;
+
+            let status = '';
+            let colorClass = '';
+
+            if (bmi < 18.5) {
+                status = 'Underweight';
+                colorClass = 'text-blue-400';
+            } else if (bmi >= 18.5 && bmi <= 24.9) {
+                status = 'Normal Weight (Optimal)';
+                colorClass = 'text-brand-yellow';
+            } else if (bmi >= 25.0 && bmi <= 29.9) {
+                status = 'Overweight';
+                colorClass = 'text-brand-orange';
+            } else {
+                status = 'Obese';
+                colorClass = 'text-red-500';
+            }
+
+            bmiStatusEl.innerText = status;
+            bmiValueEl.className = `text-4xl font-black font-heading my-1 ${colorClass}`;
+            resultDiv.classList.remove('hidden');
+        }
+
+        // Handle Plan Selection
+        function selectPlan(planName, price) {
+            const planSelect = document.getElementById('contact-plan');
+            if (planSelect) {
+                planSelect.value = planName;
+            }
+            // Scroll smoothly to contact section
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            showModal('Plan Selected!', `You chose the ${planName} plan (${price}). Please fill out your details to complete registration.`);
+        }
+
+        // Contact Form Submission
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            const plan = document.getElementById('contact-plan').value;
+
+            showModal('Thank You!', `Thanks ${name}! We have received your inquiry regarding the "${plan}". Our team will contact you within 24 hours.`);
+            document.getElementById('contact-form').reset();
+        }
+
+        // Modal Utility Functions
+        function showModal(title, message) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-message').innerText = message;
+            document.getElementById('modal-box').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-box').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
